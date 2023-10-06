@@ -13,46 +13,51 @@
     <link rel="stylesheet" href="./assets/reset.css" />
     <link rel="stylesheet" href="./assets/style.css" />
     <title>Anime Info</title>
-    </head>
- <header> 
-    <h1> Anime info Sheet</h1>
- </header>
-<body>
-   <div class="container">
-    <form>
-        <input type="text" id="seach-input" aria-placeholder="search"></input>
-            <button>search</button> 
-        </input>
-    </form>
-   </div>
+  </head>
+  <div class="top-name container-fluid">
+    <div class="container">
+      <h1>Anime</h1>
+    </div>
+  </div>
+  <body>
+    <div>
+      <div class="search-container">
+        <div class="row-btn gx-5">
+          <div class="col">
+            <label for="showtitle">Anime Title</label>
+            <input type="text" id="animetitle" />
+          </div>
+          <div class="col">
+            <input type="button" value="Search" id="search" />
+          </div>
+        </div>
+      </div>
 
- <div class="info-card">
-     <h4>information</h4>
-     <ul>
-      <li id="title"></li>
-      <li id="synopsis"></li>
-      <li id="date"></li>
-      <li id="genre"></li>
-      <li id="rating"></li>
-      <li id="status"></li>
-      <li id="sim"></li>
-      <li id="source"></li>
-     </ul>
- </div>
- <div class="img-card">
-  <h4 id="title-a"></h4> 
-  <img id="pic">
-</div>
-    <aside>
-       past searches
-    </aside>
-</body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <div class="info-card">
+        <h4>information</h4>
+        <ul>
+          <li id="title">title</li>
+          <li id="synopsis">synopsis</li>
+          <li id="date">date</li>
+          <li id="genre">genre</li>
+          <li id="rating">rating</li>
+          <li id="status">status</li>
+          <li id="sim">similar titles</li>
+          <li id="source">place to watch</li>
+        </ul>
+      </div>
+      <div class="img-card">
+        <h4 id="title-a"></h4>
+        <img id="pic" />
+      </div>
+    </div>
+    <aside>past searches</aside>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script
     src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
     crossorigin="anonymous"
   ></script>
-<script src="./assets/script.js"></script>
-
+  <script src="./assets/script.js"></script>
 </html>
