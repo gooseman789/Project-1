@@ -10,11 +10,12 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="BCSS/node_modules/bulma/css/bulma.min.css" />
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./assets/reset.css" />
+    <link rel="stylesheet" href="./assets/style.css" />
     <title>Anime Info</title>
+    </head>
  <header> 
-    <h1> Title</h1>
+    <h1> Anime info Sheet</h1>
  </header>
 <body>
    <div class="container">
@@ -25,11 +26,23 @@
     </form>
    </div>
 
- <div>
-    
-    <h4>informational txt</h4> <img src="image">
-    <h4> informational txt</4> <img src="Image">
+ <div class="info-card">
+     <h4>information</h4>
+     <ul>
+      <li id="title"></li>
+      <li id="synopsis"></li>
+      <li id="date"></li>
+      <li id="genre"></li>
+      <li id="rating"></li>
+      <li id="status"></li>
+      <li id="sim"></li>
+      <li id="source"></li>
+     </ul>
  </div>
+ <div class="img-card">
+  <h4 id="title-a"></h4> 
+  <img id="pic">
+</div>
     <aside>
        past searches
     </aside>
@@ -40,6 +53,6 @@
     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
     crossorigin="anonymous"
   ></script>
-<script src="assets/script.js"></script>
+<script src="./assets/script.js"></script>
 
 </html>
