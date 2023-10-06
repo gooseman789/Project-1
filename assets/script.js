@@ -21,4 +21,63 @@ BTN.on('click', function () {
         $( "#pic" ).attr('src', info[6]);
         
     })
+    fetch('https://api.watchmode.com/v1/search/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&search_field=name&search_value=' + UserI.val(), {
+    method: 'GET',
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        var titleAR = data.title_results
+        var filteredItems = [];
+        for (let i = 0; i < titleAR.length; i++) {
+            if (titleAR[i].type == "tv_series") {
+                filteredItems.push(titleAR[i])
+            }
+        }
+        var itemID = filteredItems[0].id;
+
+        fetch('https://api.watchmode.com/v1/title/' + itemID + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
+            method: 'GET',
+        })
+        .then(function (response2) {
+            return response2.json();
+        })
+        .then(function(data2) {
+            var date = data2.release_date
+            console.log(date)
+            var sources = data2.sources
+            var simTITLE1 = data2.similar_titles[0]
+            var simTITLE2 = data2.similar_titles[1]
+            var sourceEL = " "
+            if (sources.length > 0) {
+                var sourcesLIST = data2.sources[0]
+                sourceEL += sourcesLIST.type + ' on ' + sourcesLIST.web_url
+            } else {
+                sourceEL = ("Sorry, I do not know where to find this show legally")
+            }
+            console.log(sourceEL)
+            fetch('https://api.watchmode.com/v1/title/' + simTITLE1 + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
+                method: 'GET',
+            })
+            .then(function (response3) {
+                return response3.json()
+            })
+            .then(function(data3) {
+                var simSHOW1 = data3.title
+                // console.log(simSHOW1)
+            })
+            fetch('https://api.watchmode.com/v1/title/' + simTITLE2 + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
+                method: 'GET',
+            })
+            .then(function (response4) {
+                return response4.json()
+            })
+            .then(function(data4) {
+                var simSHOW2 = data4.title
+                // console.log(simSHOW2)
+            })
+        })
+
+    })
 })
