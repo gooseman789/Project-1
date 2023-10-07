@@ -22,38 +22,38 @@
     font-size: 40px;
     
 }
-
-
-.card-container {
+  
+  .flex-container {
     display: flex;
-}
-
-
-.info-card {
-    flex: 1; 
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    margin-right: 10px; 
-}
-
-
-.img-card {
-    flex: 1; 
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-
-
-aside {
+  }
+  
+  aside {
     background-color: #1b2838;
     color: #c7d5e0;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    width: 200px; 
-}
+    width: 200px;
+    margin-right: 10px; 
+  }
+  
+  .info-card {
+    flex: 1;
+    width: 300px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+  }
+  
+  .img-card {
+    flex: 1;
+    width: 300px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+  }
+  
