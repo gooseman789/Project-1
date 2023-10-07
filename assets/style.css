@@ -22,24 +22,6 @@
     font-size: 40px;
     
 }
-
-.top-name {
-    background-color: rgb(134, 134, 214);
-    margin-bottom: 10px;
-    padding-bottom: 45px;
-    font-size: 60px;
-    text-align: center;
-  }
-  
-  .col {
-    all: unset;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-  
-  .row-btn {
-    text-align: center;
-  }
   
   .flex-container {
     display: flex;
