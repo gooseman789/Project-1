@@ -77,6 +77,10 @@ body{
   position: relative;
 }
 
+ul li {
+    margin-bottom: 10px; 
+  }
+  
 .list {
   list-style-type: square;
 }
