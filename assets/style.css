@@ -1,12 +1,13 @@
 .top-name {
   margin-bottom: 10px;
   padding-bottom: 45px;
-  font-size: 60px;
+  font-size: 49px;
   text-align: center;
-  width: 300px;
+  width: 415px;
   background-color: #000;
   opacity: .7;
   color:white;
+  padding-top: 23px;
 }
 
 .col{
@@ -32,14 +33,11 @@
 }
 
 aside {
-  width: 300px;
   background-color: #000;
   opacity: .8;
   color:white;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  width: 200px;
+  margin: 20px auto;
   margin-right: 10px;
   margin-left: 10px; 
 }
@@ -52,9 +50,9 @@ aside {
   color:white;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   margin: 20px auto;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .img-card {
@@ -64,7 +62,6 @@ aside {
   opacity: .8;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   margin: 20px auto;
   margin-right: 10px;
   text-align: center;
@@ -86,6 +83,7 @@ ul li {
 }
 .info {
   text-align: center;
+  font-size: 45px;
 }
 .footer{
   background-color: #000;
@@ -93,4 +91,9 @@ ul li {
   color:white;
   border-radius: 5px;
   margin: 20px auto;
+}
+.style-button {
+  display: block;
+  margin-left: 10px;
+  margin-top: 10px;
 }
