@@ -1,6 +1,7 @@
 var BTN = $("#search");
 var UserI = $("#animetitle");
 var userIn = [""];
+var apidate = " ";
 if (JSON.parse(localStorage.getItem("past searches")) != null) {
   var PSbuttons = JSON.parse(localStorage.getItem("past searches"));
 } else {
@@ -52,64 +53,74 @@ $(document).ready(() => {
           $("#genre").text(genres);
           $("#pic").attr("src", info[6]);
         }
-        //     })
-        //     fetch('https://api.watchmode.com/v1/search/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&search_field=name&search_value=' + UserI.val(), {
-        //     method: 'GET',
-        //     })
-        //     .then(function (response) {
-        //         return response.json();
-        //     })
-        //     .then(function (data) {
-        //         var titleAR = data.title_results
-        //         var filteredItems = [];
-        //         for (let i = 0; i < titleAR.length; i++) {
-        //             if (titleAR[i].type == "tv_series") {
-        //                 filteredItems.push(titleAR[i])
-        //             }
-        //         }
-        //         var itemID = filteredItems[0].id;
+            })
+            fetch('https://api.watchmode.com/v1/search/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&search_field=name&search_value=' + UserI.val(), {
+            method: 'GET',
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                var titleAR = data.title_results
+                var filteredItems = [];
+                for (let i = 0; i < titleAR.length; i++) {
+                    if (titleAR[i].type == "tv_series") {
+                        filteredItems.push(titleAR[i])
+                    }
+                }
+                var itemID = filteredItems[0].id;
 
-        //         fetch('https://api.watchmode.com/v1/title/' + itemID + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
-        //             method: 'GET',
-        //         })
-        //         .then(function (response2) {
-        //             return response2.json();
-        //         })
-        //         .then(function(data2) {
-        //             var date = data2.release_date
-        //             console.log(date)
-        //             var sources = data2.sources
-        //             var simTITLE1 = data2.similar_titles[0]
-        //             var simTITLE2 = data2.similar_titles[1]
-        //             var sourceEL = " "
-        //             if (sources.length > 0) {
-        //                 var sourcesLIST = data2.sources[0]
-        //                 sourceEL += sourcesLIST.type + ' on ' + sourcesLIST.web_url
-        //             } else {
-        //                 sourceEL = ("Sorry, I do not know where to find this show legally")
-        //             }
-        //             console.log(sourceEL)
-        //             fetch('https://api.watchmode.com/v1/title/' + simTITLE1 + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
-        //                 method: 'GET',
-        //             })
-        //             .then(function (response3) {
-        //                 return response3.json()
-        //             })
-        //             .then(function(data3) {
-        //                 var simSHOW1 = data3.title
-        //                 // console.log(simSHOW1)
-        //             })
-        //             fetch('https://api.watchmode.com/v1/title/' + simTITLE2 + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
-        //                 method: 'GET',
-        //             })
-        //             .then(function (response4) {
-        //                 return response4.json()
-        //             })
-        //             .then(function(data4) {
-        //                 var simSHOW2 = data4.title
-        //                 // console.log(simSHOW2)
-        //             })
-        //         })
+                fetch('https://api.watchmode.com/v1/title/' + itemID + '/details/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&append_to_response=sources', {
+                    method: 'GET',
+                })
+                .then(function (response2) {
+                    return response2.json();
+                })
+                .then(function(data2) {
+                    var date = data2.release_date
+                    console.log(date)
+                    dateyear = date.split('-')
+                    if (dateyear[0] != apidate) {
+                      $('#sim').text("I am sorry, I cannot find any similar shows or places to watch")
+                    } else {
+                    $('#source').text(" ")
+                    var sources = data2.sources
+                    var simTITLE1 = data2.similar_titles[0]
+                    var simTITLE2 = data2.similar_titles[1]
+                    var sourceEL = " "
+                    var showsall = " "
+                    if (sources.length > 0) {
+                        var sourcesLIST = data2.sources[0]
+                        sourceEL += sourcesLIST.type + ' on ' + sourcesLIST.web_url
+                    } else {
+                        sourceEL = ("Sorry, I do not know where to find this show legally")
+                        $('#source').text(sourceEL)
+                    }
+                    console.log(sourceEL)
+                    fetch('https://api.watchmode.com/v1/title/' + simTITLE1 + '/details/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&append_to_response=sources', {
+                        method: 'GET',
+                    })
+                    .then(function (response3) {
+                        return response3.json()
+                    })
+                    .then(function(data3) {
+                        var simSHOW1 = data3.title
+                       showsall += "Similar shows are " + simSHOW1
+                        // console.log(simSHOW1)
+                    })
+                    fetch('https://api.watchmode.com/v1/title/' + simTITLE2 + '/details/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&append_to_response=sources', {
+                        method: 'GET',
+                    })
+                    .then(function (response4) {
+                        return response4.json()
+                    })
+                    .then(function(data4) {
+                        var simSHOW2 = data4.title
+                        showsall += " and " + simSHOW2
+                        // console.log(simSHOW2)
+                    })
+                  }})
+         
       });
   });
 });
@@ -214,68 +225,79 @@ BTN.on("click", function () {
                 $("#genre").text(genres);
                 $("#pic").attr("src", info[6]);
               }
-              //     })
-              //     fetch('https://api.watchmode.com/v1/search/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&search_field=name&search_value=' + UserI.val(), {
-              //     method: 'GET',
-              //     })
-              //     .then(function (response) {
-              //         return response.json();
-              //     })
-              //     .then(function (data) {
-              //         var titleAR = data.title_results
-              //         var filteredItems = [];
-              //         for (let i = 0; i < titleAR.length; i++) {
-              //             if (titleAR[i].type == "tv_series") {
-              //                 filteredItems.push(titleAR[i])
-              //             }
-              //         }
-              //         var itemID = filteredItems[0].id;
+                  })
+                  fetch('https://api.watchmode.com/v1/search/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&search_field=name&search_value=' + UserI.val(), {
+                  method: 'GET',
+                  })
+                  .then(function (response) {
+                      return response.json();
+                  })
+                  .then(function (data) {
+                      var titleAR = data.title_results
+                      var filteredItems = [];
+                      for (let i = 0; i < titleAR.length; i++) {
+                          if (titleAR[i].type == "tv_series") {
+                              filteredItems.push(titleAR[i])
+                          }
+                      }
+                      var itemID = filteredItems[0].id;
       
-              //         fetch('https://api.watchmode.com/v1/title/' + itemID + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
-              //             method: 'GET',
-              //         })
-              //         .then(function (response2) {
-              //             return response2.json();
-              //         })
-              //         .then(function(data2) {
-              //             var date = data2.release_date
-              //             console.log(date)
-              //             var sources = data2.sources
-              //             var simTITLE1 = data2.similar_titles[0]
-              //             var simTITLE2 = data2.similar_titles[1]
-              //             var sourceEL = " "
-              //             if (sources.length > 0) {
-              //                 var sourcesLIST = data2.sources[0]
-              //                 sourceEL += sourcesLIST.type + ' on ' + sourcesLIST.web_url
-              //             } else {
-              //                 sourceEL = ("Sorry, I do not know where to find this show legally")
-              //             }
-              //             console.log(sourceEL)
-              //             fetch('https://api.watchmode.com/v1/title/' + simTITLE1 + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
-              //                 method: 'GET',
-              //             })
-              //             .then(function (response3) {
-              //                 return response3.json()
-              //             })
-              //             .then(function(data3) {
-              //                 var simSHOW1 = data3.title
-              //                 // console.log(simSHOW1)
-              //             })
-              //             fetch('https://api.watchmode.com/v1/title/' + simTITLE2 + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
-              //                 method: 'GET',
-              //             })
-              //             .then(function (response4) {
-              //                 return response4.json()
-              //             })
-              //             .then(function(data4) {
-              //                 var simSHOW2 = data4.title
-              //                 // console.log(simSHOW2)
-              //             })
-              //         })
-            });
-        });
-        
-      } else {
+                      fetch('https://api.watchmode.com/v1/title/' + itemID + '/details/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&append_to_response=sources', {
+                          method: 'GET',
+                      })
+                      .then(function (response2) {
+                          return response2.json();
+                      })
+                      .then(function(data2) {
+                          var date = data2.release_date
+                          console.log(date)
+                          dateyear = date.split('-')
+                          if (dateyear[0] != apidate) {
+                            $('#sim').text("I am sorry, I cannot find any similar shows or places to watch")
+                            $('#source').text(" ")
+                          } else {
+                          var sources = data2.sources
+                          var simTITLE1 = data2.similar_titles[0]
+                          var simTITLE2 = data2.similar_titles[1]
+                          var sourceEL = " "
+                          var showsall = " "
+                          if (sources.length > 0) {
+                              var sourcesLIST = data2.sources[0]
+                              sourceEL += sourcesLIST.type + ' on ' + sourcesLIST.web_url
+                          } else {
+                              sourceEL = ("Sorry, I do not know where to find this show legally")
+                             $('#source').text(sourceEL)
+                          }
+                          console.log(sourceEL)
+                          fetch('https://api.watchmode.com/v1/title/' + simTITLE1 + '/details/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cIX&append_to_response=sources', {
+                              method: 'GET',
+                          })
+                          .then(function (response3) {
+                              return response3.json()
+                          })
+                          .then(function(data3) {
+                              var simSHOW1 = data3.title
+                              // console.log(simSHOW1)
+                              showsall += "Similar shows are " + simSHOW1
+                              $('#sim').text(showsall)
+                          })
+                          fetch('https://api.watchmode.com/v1/title/' + simTITLE2 + '/details/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&append_to_response=sources', {
+                              method: 'GET',
+                          })
+                          .then(function (response4) {
+                              return response4.json()
+                          })
+                          .then(function(data4) {
+                              var simSHOW2 = data4.title
+                              // console.log(simSHOW2)
+                              showsall += " and " + simSHOW2
+                              $('#sim').text(showsall)
+                          })}
+                      })
+            })
+            })
+
+              } else {
         $("#title").text("NO DATA FOUND");
         $("#episodes").text("NO DATA FOUND");
         $("#rating").text("NO DATA FOUND");
@@ -288,64 +310,75 @@ BTN.on("click", function () {
           "https://t4.ftcdn.net/jpg/04/75/01/23/360_F_475012363_aNqXx8CrsoTfJP5KCf1rERd6G50K0hXw.jpg"
         );
       }
-      //     })
-      //     fetch('https://api.watchmode.com/v1/search/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&search_field=name&search_value=' + UserI.val(), {
-      //     method: 'GET',
-      //     })
-      //     .then(function (response) {
-      //         return response.json();
-      //     })
-      //     .then(function (data) {
-      //         var titleAR = data.title_results
-      //         var filteredItems = [];
-      //         for (let i = 0; i < titleAR.length; i++) {
-      //             if (titleAR[i].type == "tv_series") {
-      //                 filteredItems.push(titleAR[i])
-      //             }
-      //         }
-      //         var itemID = filteredItems[0].id;
+    })
+          fetch('https://api.watchmode.com/v1/search/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&search_field=name&search_value=' + UserI.val(), {
+          method: 'GET',
+          })
+          .then(function (response) {
+              return response.json();
+          })
+          .then(function (data) {
+              var titleAR = data.title_results
+              var filteredItems = [];
+              for (let i = 0; i < titleAR.length; i++) {
+                  if (titleAR[i].type == "tv_series") {
+                      filteredItems.push(titleAR[i])
+                  }
+              }
+              var itemID = filteredItems[0].id;
 
-      //         fetch('https://api.watchmode.com/v1/title/' + itemID + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
-      //             method: 'GET',
-      //         })
-      //         .then(function (response2) {
-      //             return response2.json();
-      //         })
-      //         .then(function(data2) {
-      //             var date = data2.release_date
-      //             console.log(date)
-      //             var sources = data2.sources
-      //             var simTITLE1 = data2.similar_titles[0]
-      //             var simTITLE2 = data2.similar_titles[1]
-      //             var sourceEL = " "
-      //             if (sources.length > 0) {
-      //                 var sourcesLIST = data2.sources[0]
-      //                 sourceEL += sourcesLIST.type + ' on ' + sourcesLIST.web_url
-      //             } else {
-      //                 sourceEL = ("Sorry, I do not know where to find this show legally")
-      //             }
-      //             console.log(sourceEL)
-      //             fetch('https://api.watchmode.com/v1/title/' + simTITLE1 + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
-      //                 method: 'GET',
-      //             })
-      //             .then(function (response3) {
-      //                 return response3.json()
-      //             })
-      //             .then(function(data3) {
-      //                 var simSHOW1 = data3.title
-      //                 // console.log(simSHOW1)
-      //             })
-      //             fetch('https://api.watchmode.com/v1/title/' + simTITLE2 + '/details/?apiKey=kAkSWPYcQeHHMrCJU5ONXuwRIH85vNjxsRjumdtX&append_to_response=sources', {
-      //                 method: 'GET',
-      //             })
-      //             .then(function (response4) {
-      //                 return response4.json()
-      //             })
-      //             .then(function(data4) {
-      //                 var simSHOW2 = data4.title
-      //                 // console.log(simSHOW2)
-      //             })
-      //         })
-    });
-});
-
+              fetch('https://api.watchmode.com/v1/title/' + itemID + '/details/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&append_to_response=sources', {
+                  method: 'GET',
+              })
+              .then(function (response2) {
+                  return response2.json();
+              })
+              .then(function(data2) {
+                  var date = data2.release_date
+                  dateyear = date.split('-')
+                  console.log(date)
+                  if (dateyear[0] != apidate) {
+                    $('#sim').text("I am sorry, I cannot find any similar shows or places to watch")
+                    $('#source').text(" ")
+                  } else {
+                  var sources = data2.sources
+                  var simTITLE1 = data2.similar_titles[0]
+                  var simTITLE2 = data2.similar_titles[1]
+                  var sourceEL = " "
+                  var showsall = " " 
+                  if (sources.length > 0) {
+                      var sourcesLIST = data2.sources[0]
+                      sourceEL += sourcesLIST.type + ' on ' + sourcesLIST.web_url
+                  } else {
+                      sourceEL = ("Sorry, I do not know where to find this show legally")
+                      $('#source').text(sourceEL)
+                  }
+                  console.log(sourceEL)
+                  fetch('https://api.watchmode.com/v1/title/' + simTITLE1 + '/details/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&append_to_response=sources', {
+                      method: 'GET',
+                  })
+                  .then(function (response3) {
+                      return response3.json()
+                  })
+                  .then(function(data3) {
+                      var simSHOW1 = data3.title
+                      showsall += "Similar shows are " + simSHOW1
+                      $('#sim').text(showsall)
+                      // console.log(simSHOW1)
+                  })
+                  fetch('https://api.watchmode.com/v1/title/' + simTITLE2 + '/details/?apiKey=ohYP4vnMNvPPW1O0egOBVQfqKwvQqDOTKITGb4cI&append_to_response=sources', {
+                      method: 'GET',
+                  })
+                  .then(function (response4) {
+                      return response4.json()
+                  })
+                  .then(function(data4) {
+                      var simSHOW2 = data4.title
+                      var simSHOW2 = data4.title
+                      showsall += " and " + simSHOW2
+                      // console.log(simSHOW2)
+                  })
+              }})
+    
+    })
+  })
