@@ -149,7 +149,7 @@ BTN.on("click", function () {
         $("#genre").text(genres);
         $("#pic").attr("src", info[6]);
         for (i = 0; i < userIn.length; i++) {
-          if (UserI.val() == userIn[i]) {
+          if (UserI.val() == userIn[i] || UserI.val() == userIn[i].toUpperCase()) {
             var buttons = false;
             break;
           } else {
@@ -160,7 +160,7 @@ BTN.on("click", function () {
         var Pastsearches = JSON.parse(localStorage.getItem("past searches"));
         if (Pastsearches != null) {
           for (i = 0; i < Pastsearches.length; i++) {
-            if (UserI.val() == Pastsearches[i]) {
+            if (UserI.val() == Pastsearches[i] || UserI.val() == Pastsearches[i].toUpperCase() ) {
               var buttonss = false;
               break;
             } else {
@@ -168,7 +168,7 @@ BTN.on("click", function () {
             }
           }
         }
-        userIn.push(UserI.val());
+        userIn.push(UserI.val().toLowerCase());
 
         var place = userIn.length - 1;
         if (buttons == true && buttonss == true) {
@@ -177,7 +177,7 @@ BTN.on("click", function () {
             .attr("id", userIn[place])
             .attr("class", "style-button");
           $("aside").append(button);
-          PSbuttons.push(UserI.val());
+          PSbuttons.push(UserI.val().toLowerCase());
           localStorage.setItem("past searches", JSON.stringify(PSbuttons));
         }
         $("button").click(function () {
@@ -348,3 +348,4 @@ BTN.on("click", function () {
       //         })
     });
 });
+
